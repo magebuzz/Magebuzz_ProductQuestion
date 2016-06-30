@@ -1,0 +1,36 @@
+<?php
+/**
+ * @copyright Copyright (c) 2015 www.magebuzz.com 
+ */
+?>
+
+<?php $_helper    = Mage::helper('productquestion') ?>
+<?php $isGuestAllowedToAsk    = $this->isGuestAllowedToAsk() ?>
+<?php $isCustomerLoggedIn     = $this->isCustomerLoggedIn() ?>
+<?php $isShownInProductDetail = $this->isShownInProductDetail() ?>
+
+<?php if ($_helper->isEnabled()): ?>
+  <?php if ($isGuestAllowedToAsk && $isShownInProductDetail): ?>
+    <?php echo $this->getChildHtml('product-question-in-page') ?>
+  <?php endif; ?>
+
+  <?php if ($isGuestAllowedToAsk && !$isShownInProductDetail): ?>
+    <?php $this->getLayout()->unsetBlock('product-question-in-page') ?>
+  <?php endif; ?>
+
+  <?php if (!$isGuestAllowedToAsk && $isShownInProductDetail): ?>
+    <?php if ($isCustomerLoggedIn): ?>
+      <?php echo $this->getChildHtml('product-question-in-page') ?>
+    <?php else: ?>
+      <?php $this->getLayout()->unsetBlock('product-question-in-page') ?>
+    <?php endif ?>
+  <?php endif ?>
+
+  <?php if (!$isGuestAllowedToAsk && !$isShownInProductDetail): ?>
+    <?php if ($isCustomerLoggedIn): ?>
+      <?php echo $this->getChildHtml('product-question-in-page') ?>
+    <?php else: ?>
+      <?php $this->getLayout()->unsetBlock('product-question-in-page') ?>
+    <?php endif; ?>
+  <?php endif; ?>
+<?php endif; ?>

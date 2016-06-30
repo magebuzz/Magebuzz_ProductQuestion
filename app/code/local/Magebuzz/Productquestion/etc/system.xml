@@ -1,0 +1,172 @@
+<?xml version="1.0" ?>
+<config>
+  <tabs>
+    <magebuzz translate="label" module="productquestion">
+      <label>MAGEBUZZ ADD-ONS</label>
+      <sort_order>1000</sort_order>
+    </magebuzz>
+  </tabs>
+  <sections>
+    <productquestion translate="label" module="productquestion">
+      <label>Product Question</label>
+      <tab>magebuzz</tab>
+      <sort_order>1</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>
+      <groups>
+        <general translate="label">
+          <label>General</label>
+          <frontend_type>text</frontend_type>
+          <sort_order>1</sort_order>
+          <show_in_default>1</show_in_default>
+          <show_in_website>1</show_in_website>
+          <show_in_store>1</show_in_store>
+          <fields>
+            <enabled translate="label comment">
+              <label>Enable Product Question</label>
+              <frontend_type>select</frontend_type>
+              <sort_order>1</sort_order>
+              <source_model>adminhtml/system_config_source_yesno</source_model>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>0</show_in_store>
+            </enabled>  
+            <show_in_product_detail translate="label">
+              <label>Show Product Question in Product Detail</label>
+              <comment>Select 'No' will display Question in a seperate page</comment>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_yesno</source_model>
+              <sort_order>1</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+              <depends><enabled>1</enabled></depends>
+            </show_in_product_detail>
+            <allow_guest_ask_question translate="label">
+              <label>Allow guest to ask the question</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_yesno</source_model>
+              <sort_order>2</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+              <depends><enabled>1</enabled></depends>
+            </allow_guest_ask_question>
+            <enable_email_confirmation translate="label">
+              <label>Enable Email Confirmation</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_yesno</source_model>
+              <sort_order>3</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </enable_email_confirmation>            
+            <enable_question_captcha translate="label">
+              <label>Enable captcha</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_yesno</source_model>
+              <sort_order>4</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>0</show_in_website>
+              <show_in_store>0</show_in_store>
+            </enable_question_captcha>
+            <public_key translate="label">
+              <label>Public Key</label>
+              <comment>You got this from the signup page: https://www.google.com/recaptcha/admin/create</comment>
+              <frontend_type>text</frontend_type>
+              <sort_order>20</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>0</show_in_website>
+              <show_in_store>0</show_in_store>
+            </public_key>
+            <private_key translate="label">
+              <label>Private Key</label>
+              <comment>You got this from the signup page: https://www.google.com/recaptcha/admin/create</comment>
+              <frontend_type>text</frontend_type>
+              <sort_order>30</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </private_key>
+            <theme translate="label">
+              <label>reCaptcha Theme</label>
+              <comment>Customizing the Look of CAPTCHA</comment>
+              <frontend_type>select</frontend_type>
+              <source_model>productquestion/system_config_source_dropdown_theme</source_model>
+              <sort_order>40</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </theme>
+            <lang translate="label">
+              <label>reCaptcha Language</label>
+              <comment>Which language is used in the Captcha interface</comment>
+              <frontend_type>select</frontend_type>
+              <source_model>productquestion/system_config_source_dropdown_lang</source_model>
+              <sort_order>50</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </lang>
+          </fields>
+        </general>
+        <email translate="label">
+          <label>Email</label>
+          <frontend_type>text</frontend_type>
+          <sort_order>2</sort_order>
+          <show_in_default>1</show_in_default>
+          <show_in_website>1</show_in_website>
+          <show_in_store>1</show_in_store>
+          <fields>
+            <send_email_to_admin translate="label">
+              <label>Send emails to:</label>
+              <frontend_type>text</frontend_type>
+              <sort_order>1</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </send_email_to_admin>
+            <email_sender translate="label">
+              <label>Email Sender</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_email_identity</source_model>
+              <sort_order>2</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </email_sender>
+            <email_customer_template translate="label">
+              <label>Email template sent to customer</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_email_template</source_model>
+              <sort_order>3</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </email_customer_template>
+            <email_admin_template translate="label">
+              <label>Email template sent to admin</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_email_template</source_model>
+              <sort_order>4</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </email_admin_template>
+            <email_confirmation translate="label">
+              <label>Email confirmation template</label>
+              <comment>Sent to customer after posting the question</comment>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_email_template</source_model>
+              <sort_order>5</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </email_confirmation>
+          </fields>
+        </email>
+      </groups>
+    </productquestion>
+  </sections>
+</config>

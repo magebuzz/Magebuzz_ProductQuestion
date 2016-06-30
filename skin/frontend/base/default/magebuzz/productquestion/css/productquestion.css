@@ -1,0 +1,115 @@
+/* @copyright Copyright (c) 2015 www.magebuzz.com */
+
+#question-out-page {
+    background: url("../images/bkg_product_collateral.gif") repeat-x scroll 0 0 #FAF7EE;
+    border: 1px solid #C4C6C8;
+    list-style-type: none;
+    margin: 0;
+    padding: 25px;
+    text-align: left;
+}
+
+.product-question-list .question-page-title h2 {
+    border-bottom: 1px solid #E5DCC3;
+    color: #E26703;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0 0 15px;
+    padding: 0 0 1px;
+}
+
+.product-question-list .pager-question {
+    margin-bottom: 15px;
+}
+
+.product-question-list .question-list ul li {
+    color: #737373;
+    font-size: 12px;
+    text-decoration: none;
+    /*text-transform:capitalize;*/
+    font-weight: normal;
+    line-height: 20px;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    width: 90%;
+}
+
+.product-question-list .question-list ul li a {
+    background: url("../images/bkg_block-layered-label.gif") no-repeat scroll left center transparent;
+    color: #363636;
+    font-size: 13px;
+    font-weight: normal;
+    padding-left: 20px;
+    text-decoration: none;
+    margin-left: 15px;
+}
+
+.product-question-list .question-list ul li .answer {
+    padding: 5px 0 5px 45px;
+    color: #2F2F2F;
+}
+
+.product-question-list .question-list ul li .answer .question-source {
+    font-style: italic;
+    font-size: 11px;
+}
+
+.product-question-list .question-list ul li .answer .question-source .question-author span {
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.product-question-list .question-list ul li .answer .question-source .question-date {
+    text-transform: lowercase;
+}
+
+.product-question-list .question-list ul li .answer .question-source .question-date span {
+    text-transform: capitalize;
+}
+
+.product-question-form .page-form-title h2 {
+    color: #E26703;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0 0 15px;
+    padding: 0 0 1px;
+    margin-top: 15px;
+    border-bottom: 1px solid #E5DCC3;
+}
+
+.productquestion-rating-helpful {
+    background-attachment: scroll;
+    background-color: transparent;
+    background-image: url("../images/voteup.png");
+    background-position: 0 1px;
+    background-repeat: no-repeat no-repeat;
+    cursor: pointer;
+    float: left;
+    padding: 7px 0 0 25px;
+    width: 15%;
+}
+
+.productquestion-rating-nothelpful {
+    background-attachment: scroll;
+    background-color: transparent;
+    background-image: url("../images/votedown.png");
+    background-position: 0 1px;
+    background-repeat: no-repeat no-repeat;
+    cursor: pointer;
+    float: left;
+    padding: 7px 0 0 25px;
+    width: 15%;
+}
+
+.productquestion-vote {
+    width: 100%;
+    float: left;
+}
+
+.productquestion-ratings {
+    float: left;
+    width: 30%;
+    font-size: 11px;
+    line-height: 1.25;
+    margin: 7px 0;
+}

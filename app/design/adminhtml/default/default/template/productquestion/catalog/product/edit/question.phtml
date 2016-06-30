@@ -1,0 +1,68 @@
+<?php
+/**
+ * @copyright Copyright (c) 2015 www.magebuzz.com 
+ * @var $this Magebuzz_Productquestion_Block_Adminhtml_Productquestion
+ */
+?>
+<?php $collection = $this->getCollection() ?>
+<?php $questions = $collection->getData() ?>
+<?php $product_name = $this->getProductName() ?>
+<div class="productquestion_tabs_form_section_content" style="">
+  <div class="entry-edit">
+    <div class="entry-edit-head">
+      <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $this->__('Questions on ') . $product_name ?></h4>
+
+      <div class="form-buttons"></div>
+    </div>
+    <div id="group_fields51" class="fieldset fieldset-wide">
+      <div class="hor-scroll">
+        <table class="form-list" cellspacing="0">
+          <tbody>
+          <?php if (!empty($questions)): ?>
+            <?php foreach ($questions as $question): ?>
+              <tr>
+                <td>
+                  <a id="question_<?php echo $question['productquestion_id'] ?>"
+                     onclick="showanswer('<?php echo $question['productquestion_id'] ?>')"
+                     href="javascript://"><?php echo $question['question'] ?></a>
+
+                  <div class="answer" id="answer_<?php echo $question['productquestion_id'] ?>" style="display:none;">
+                    <?php echo $question['answer'] ?>
+                    <br/>
+                    <cite class="question-source">
+                      <span class="question-author"><?php echo 'by' ?>
+                        &nbsp;<span><? echo $question['author_name'] ?></span></span>
+                      <span class="question-date">
+                        <?php echo ' at ' . date('F d, Y H:i:s', Mage::getModel('core/date')->gmtTimestamp($question['date'])) ?>
+                      </span>
+                    </cite>
+                  </div>
+                </td>
+              </tr>
+            <?php endforeach ?>
+          <?php else: ?>
+            <?php echo $this->__('No questions asked yet') ?>
+          <?php endif ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  function showanswer(question_id) {
+    $$('div.answer').each(
+      function (e) {
+        if (e.id != 'answer_' + question_id) {
+          e.hide();
+        }
+      }
+    );
+    if ($('answer_' + question_id).getStyle('display') == 'none') {
+      $('answer_' + question_id).show();
+    }
+    else {
+      $('answer_' + question_id).hide();
+    }
+  }
+</script>

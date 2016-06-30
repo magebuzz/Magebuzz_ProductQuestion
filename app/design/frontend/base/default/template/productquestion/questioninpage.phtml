@@ -1,0 +1,193 @@
+<?php
+/**
+ * @copyright Copyright (c) 2015 www.magebuzz.com
+ * @var $this Magebuzz_Productquestion_Block_Productquestion
+ */
+?>
+<?php $data = $this->getFormData() ?>
+<?php $_helper = Mage::helper('productquestion') ?>
+<div id="question-in-page">
+  <?php $_product    = $this->getProduct()->getData() ?>
+  <?php $current_url = $this->helper('core/url')->getCurrentUrl() ?>
+  <?php $collection  = $this->getQuestion() ?>
+  <?php $questions   = $collection->getData() ?>
+  <div class="product-question-list">
+    <div class="question-page-title">
+      <h2><?php echo $this->__('Questions on ') . $_product['name'] ?></h2>
+    </div>
+    <div class="pager-question">
+      <?php echo $this->getPagerHtml()?>
+    </div>
+    <div class="question-list">
+      <?php if (!empty($questions)): ?>
+        <ul>
+          <?php foreach ($questions as $question): ?>
+            <?php
+            $productId = '';
+            if (isset($question['product_id'])) {
+              $productId = $question['product_id'];
+            }
+            ?>
+            <li>
+              <a id="question_<?php echo $question['productquestion_id'] ?>"
+                 onclick="showanswer('<?php echo $question['productquestion_id'] ?>')"
+                 href="javascript://"><?php echo $question['question'] ?></a>
+
+              <div class="answer" id="answer_<?php echo $question['productquestion_id'] ?>" style="display:none">
+                <?php echo $question['answer'] ?>
+                <br/>
+                <cite class="question-source">
+                  <span class="question-author"><?php echo 'by' ?>&nbsp;<span><?php echo $question['author_name'] ?></span></span>
+                  <span class="question-date">
+                    <?php echo ' on ' ?>
+                    <span><?php echo date('F j, Y', Mage::getModel('core/date')->gmtTimestamp($question['date'])) ?></span>
+                  </span>
+                </cite>
+
+                <div class="productquestion-vote">
+                  <div class="productquestion-ratings">
+                    <div class="rating-box" style="float: left;">
+                      <div class="rating"
+                           style="width:<?php echo $_helper->getPercentVote($question['productquestion_id']); ?>%;"></div>
+                    </div>
+                    <p><?php echo $_helper->getCountVote($question['productquestion_id']); ?>
+                      vote(s)</p>
+                  </div>
+                  <?php $requestCookieName = 'request_' . $question['productquestion_id'] . '_' . $productId; ?>
+                  <?php
+                    if (!$this->getCookie($requestCookieName) || $this->getCookie($requestCookieName) != $requestCookieName):
+                  ?>
+                    <div class="productquestion-rating-helpful"
+                         onclick="actionVote('voteup',<?php echo $question['productquestion_id']; ?>);">helpful</div>
+                    <div class="productquestion-rating-helpful"
+                         onclick="actionVote('votedown',<?php echo $question['productquestion_id']; ?>);">not helpful</div>
+                  <?php endif ?>
+                </div>
+              </div>
+              <div style="clear: both;"></div>
+            </li>
+          <?php endforeach ?>
+        </ul>
+      <?php else: ?>
+        <?php echo $this->__('No questions asked yet') ?>
+      <?php endif ?>
+    </div>
+  </div>
+  <div class="product-question-form">
+    <div class="page-form-title">
+      <h2><?php echo $this->__('Ask Your Own Question') ?></h2>
+    </div>
+    <form id="productquestionForm" method="post" action="<?php echo $this->getPostUrl() ?>">
+      <div class="fieldset">
+        <ul class="form-list">
+          <li class="fields">
+            <div class="field">
+              <label class="required" for="author_name"><em>*</em><?php echo $this->__('Your Name') ?></label>
+
+              <div class="input-box">
+                <input id="author_name" class="input-text required-entry" type="text"
+                       value="<?php if ($this->isCustomerLoggedIn()): ?><?php echo $this->getCurrentCustomer()->getName() ?><?php else: ?><?php if (isset($data['author_name'])): ?><?php echo $data['author_name'] ?><?php endif ?><?php endif ?>"
+                       title="<?php echo $this->__('Your Name') ?>" name="author_name">
+              </div>
+            </div>
+          </li>
+          <li class="fields">
+            <div class="field">
+              <label class="required" for="author_email"><em>*</em><?php echo $this->__('Email') ?></label>
+
+              <div class="input-box">
+                <input id="author_email" class="input-text required-entry" type="email"
+                       value="<?php if ($this->isCustomerLoggedIn()): ?><?php echo $this->getCurrentCustomer()->getEmail() ?><?php else: ?><?php if (isset($data['author_email'])): ?><?php echo $data['author_email'] ?><?php endif ?><?php endif ?>"
+                       title="<?php echo $this->__('Email') ?>" name="author_email">
+              </div>
+            </div>
+          </li>
+          <li class="wide">
+            <label class="required" for="question"><em>*</em><?php echo $this->__('Question') ?></label>
+
+            <div class="input-box">
+              <textarea id="question" class="required-entry input-text" rows="3" cols="5"
+                        title="<?php echo $this->__('Question') ?>"
+                        name="question"><?php if (isset($data['question'])): ?><?php echo $data['question'] ?><?php endif ?></textarea>
+            </div>
+          </li>
+          <li>
+            <div class="field">
+              <label for="visibility" ><?php echo $this->__('Visibility')?></label>
+            <div class="input-box">
+              <select name="visibility" id="visibility" class="input-text">
+                <option value="0"><?php echo $this->__('Private')?></option>
+                <option value="1"><?php echo $this->__('Public')?></option>
+              </select>
+            </div>
+          </div>
+          </li>
+          <li class="product_id">
+            <input name="product_id" type="hidden" value="<?php echo $_product['entity_id'] ?>">
+          </li>
+          <li class="current-url">
+            <input name="current_url" type="hidden" value="<?php echo $current_url ?>">
+          </li>
+        </ul>
+      </div>
+      <?php if ($_helper->isCaptchaEnabled()): ?>
+        <script src="https://www.google.com/recaptcha/api.js?hl=<?php echo $_helper->getCaptchaLanguage() ?>" async defer></script>
+        <div class="g-recaptcha" data-sitekey="<?php echo $_helper->getPublicKey() ?>" data-theme="<?php echo $_helper->getCaptchaTheme() ?>"></div>
+      <?php endif ?>
+      <div class="buttons-set">
+        <button class="button" title="<?php echo $this->__('Submit') ?>" type="submit">
+          <span><span><?php echo $this->__('Submit') ?></span></span>
+        </button>
+        <button class="button" onclick="resetFields();" title="<?php echo $this->__('Reset') ?>" type="button">
+          <span><span><?php echo $this->__('Reset') ?></span></span>
+        </button>
+        <p class="back-link">
+          <a href="<?php echo $this->getUrl($_product['url_path']) ?>">
+            <small>&laquo; </small>
+            <?php echo $this->__('Back to the product page') ?>
+          </a>
+        </p>
+      </div>
+    </form>
+  </div>
+</div>
+<script type="text/javascript">
+  function showanswer(question_id) {
+    $$('div.answer').each(
+      function (e) {
+        if (e.id != 'answer_' + question_id) {
+          e.hide();
+        }
+      }
+    );
+
+    if ($('answer_' + question_id).getStyle('display') == 'none') {
+      $('answer_' + question_id).show();
+    }
+    else {
+      $('answer_' + question_id).hide();
+    }
+  }
+  //<![CDATA[
+  var productquestionForm = new VarienForm('productquestionForm', false);
+
+  function resetFields() {
+    Form.reset('productquestionForm');
+  }
+
+  function actionVote(vote, requestId) {
+    var ajaxurl = "<?php echo Mage::getBaseUrl() . 'productquestion/index/vote'?>";
+    new Ajax.Request(ajaxurl, {
+      method: 'post',
+      parameters: {requestid: requestId, vote: vote},
+      onSuccess: function (forgot_success_give) {
+
+        if (forgot_success_give.responseText) {
+          document.location.reload(true);
+        }
+      }
+    });
+  }
+
+  //]]>
+</script>

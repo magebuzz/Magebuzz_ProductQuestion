@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+  <catalog_product_view>
+    <reference name="head">
+      <action method="addCss">
+        <stylesheet>magebuzz/productquestion/css/productquestion.css</stylesheet>
+      </action>
+    </reference>
+    <reference name="alert.urls">
+      <block type="productquestion/productquestion" name="question-link" template="productquestion/link.phtml"/>
+    </reference>
+    <reference name="product.info">
+      <block type="productquestion/productquestion" name="check-in-page" template="productquestion/checkinpage.phtml">
+        <block type="productquestion/productquestion" name="product-question-in-page"
+               template="productquestion/questioninpage.phtml">
+          <action method="addToParentGroup">
+            <group>detailed_info</group>
+          </action>
+        </block>
+        <action method="setTitle" ifconfig="productquestion/general/show_in_product_detail" translate="value">
+          <value helper="productquestion/isEnabled">Product Question</value>
+        </action>
+        <action method="addToParentGroup">
+          <group>detailed_info</group>
+        </action>
+      </block>
+    </reference>
+  </catalog_product_view>
+  <productquestion_index_index>
+    <reference name="head">
+      <action method="addCss">
+        <stylesheet>magebuzz/productquestion/css/productquestion.css</stylesheet>
+      </action>
+    </reference>
+    <reference name="root">
+      <action method="setTemplate">
+        <template>page/2columns-right.phtml</template>
+      </action>
+    </reference>
+    <reference name="content">
+      <block type="productquestion/productquestionoutpage" name="product-question-out-page"
+             template="productquestion/questionoutpage.phtml">
+      </block>
+    </reference>
+  </productquestion_index_index>
+</layout> 

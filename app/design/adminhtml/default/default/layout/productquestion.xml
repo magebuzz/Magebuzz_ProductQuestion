@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+  <adminhtml_catalog_product_edit>
+    <reference name="head">
+      <action method="addCss">
+        <stylesheet>magebuzz/productquestion/productquestion.css</stylesheet>
+      </action>
+    </reference>
+  </adminhtml_catalog_product_edit>
+  <adminhtml_productquestion_index>
+    <reference name="content">
+      <block type="productquestion/adminhtml_productquestion" name="productquestion"/>
+    </reference>
+  </adminhtml_productquestion_index>
+</layout>

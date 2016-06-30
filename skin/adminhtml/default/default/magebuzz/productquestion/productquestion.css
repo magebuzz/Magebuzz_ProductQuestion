@@ -1,0 +1,23 @@
+.form-list a {
+    background: url("../../magebuzz/productquestion/images/bkg_block-layered-label.gif") no-repeat scroll left center transparent;
+    color: #363636;
+    font-size: 13px;
+    font-weight: normal;
+    padding-left: 20px;
+    text-decoration: none;
+    margin-left: 15px;
+}
+
+.form-list .answer {
+    padding: 5px 0 5px 45px;
+    color: #2F2F2F;
+}
+
+.form-list .answer .question-source .question-author span {
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.form-list .answer .question-source .question-date {
+    text-transform: lowercase;
+}

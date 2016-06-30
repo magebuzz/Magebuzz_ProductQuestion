@@ -1,0 +1,50 @@
+<?php
+/**
+ * @copyright Copyright (c) 2015 www.magebuzz.com
+ * @var $this Magebuzz_Productquestion_Block_Productquestion
+ */
+?>
+<?php $_product   = $this->getProduct()->getData() ?>
+<?php $currentUrl = $this->helper('core/url')->getCurrentUrl() ?>
+<?php $_helper    = Mage::helper('productquestion') ?>
+<?php $isGuestAllowedToAsk    = $this->isGuestAllowedToAsk() ?>
+<?php $isCustomerLoggedIn     = $this->isCustomerLoggedIn() ?>
+<?php $isShownInProductDetail = $this->isShownInProductDetail() ?>
+
+<?php if ($_helper->isEnabled()): ?>
+  <?php if ($isGuestAllowedToAsk && $isShownInProductDetail): ?>
+    <div class="question-link">
+      <a href="#question-in-page"><?php echo $this->__('Submit your question') ?></a>
+    </div>
+  <?php endif; ?>
+
+  <?php if ($isGuestAllowedToAsk && !$isShownInProductDetail): ?>
+    <div class="question-link">
+      <a href="<?php echo $this->getProductQuestionUrl() ?>"><?php echo $this->__('Submit your question') ?></a>
+    </div>
+  <?php endif; ?>
+
+  <?php if (!$isGuestAllowedToAsk && $isShownInProductDetail): ?>
+    <?php if ($isCustomerLoggedIn): ?>
+      <div class="question-link">
+        <a href="#question-in-page"><?php echo $this->__('Submit your question') ?></a>
+      </div>
+    <?php else: ?>
+      <div class="question-link">
+        <a href="<?php echo $this->getUrl().'customer/account/login/' ?>"><?php echo $this->__('Log in to Submit your question') ?></a>
+      </div>
+    <?php endif ?>
+  <?php endif ?>
+
+  <?php if (!$isGuestAllowedToAsk && !$isShownInProductDetail): ?>
+    <?php if ($isCustomerLoggedIn): ?>
+      <div class="question-link">
+        <a href="<?php echo $this->getProductQuestionUrl() ?>"><?php echo $this->__('Submit your question') ?></a>
+      </div>
+    <?php else: ?>
+      <div class="question-link">
+        <a href="<?php echo $this->getUrl().'customer/account/login/' ?>"><?php echo $this->__('Log in to Submit your question') ?></a>
+      </div>
+    <?php endif; ?>
+  <?php endif; ?>
+<?php endif; ?>

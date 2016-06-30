@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<config>
+  <menu>
+    <productquestion>
+      <title>Product Question</title>
+      <sort_order>89</sort_order>
+      <children>
+        <manage_question module="productquestion">
+          <title>Manage Questions</title>
+          <sort_order>1</sort_order>
+          <action>adminhtml/productquestion</action>
+        </manage_question>
+        <setting_question module="productquestion">
+          <title>Setting</title>
+          <sort_order>2</sort_order>
+          <action>adminhtml/system_config/edit/section/productquestion</action>
+        </setting_question>
+      </children>
+    </productquestion>
+  </menu>
+  <acl>
+    <resources>
+      <all>
+        <title>Allow Everything</title>
+      </all>
+      <admin>
+        <children>
+          <system>
+            <children>
+              <config>
+                <children>
+                  <productquestion translate="label" module="productquestion">
+                    <title>Product Question</title>
+                  </productquestion>
+                </children>
+              </config>
+            </children>
+          </system>
+          <productquestion>
+            <title>Product Question</title>
+            <sort_order>89</sort_order>
+            <children>
+              <manage_question module="productquestion">
+                <title>Manage Questions</title>
+                <sort_order>1</sort_order>
+                <action>adminhtml/productquestion</action>
+              </manage_question>
+              <setting_question module="productquestion">
+                <title>Setting</title>
+                <sort_order>2</sort_order>
+                <action>adminhtml/system_config/edit/section/productquestion</action>
+              </setting_question>
+            </children>
+          </productquestion>
+        </children>
+      </admin>
+    </resources>
+  </acl>
+</config>
